@@ -60,3 +60,11 @@ func ParseBits(input []string) []int {
 	}
 	return result
 }
+
+func ParseInteger(input string) int {
+	parsed, err := strconv.ParseInt(input, 10, 64)
+	if err != nil {
+		log.Fatalf("unable to parse int: %v", input)
+	}
+	return int(parsed)
+}

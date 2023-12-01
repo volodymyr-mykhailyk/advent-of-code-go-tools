@@ -9,9 +9,7 @@ func Announce(message string) {
 }
 
 func Highlight(message string) {
-	fmt.Println("--------------------------------------------------------------------------")
-	fmt.Println(message)
-	fmt.Println("--------------------------------------------------------------------------")
+	fmt.Println("-------  " + message + "  -------  ")
 }
 
 func Communicate(message string, args ...any) {
