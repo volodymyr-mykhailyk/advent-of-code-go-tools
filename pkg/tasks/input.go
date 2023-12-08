@@ -17,8 +17,8 @@ func PathToFile(file string) string {
 	return filepath.Join(basePath, file)
 }
 
-func ReadLines(file string) []string {
-	body, err := os.ReadFile(PathToFile(file))
+func ReadLines(path string) []string {
+	body, err := os.ReadFile(PathToFile(path))
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
 	}
@@ -37,6 +37,7 @@ func StreamLines(path string, lines chan<- string) {
 	for scanner.Scan() {
 		lines <- scanner.Text()
 	}
+	lines <- scanner.Text()
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)

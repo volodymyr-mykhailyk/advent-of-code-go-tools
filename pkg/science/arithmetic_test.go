@@ -55,7 +55,7 @@ func TestGreatCommonDivisor(t *testing.T) {
 		},
 		{
 			a:    1260,
-			b:    210,
+			b:    250,
 			want: 10,
 		},
 	}
