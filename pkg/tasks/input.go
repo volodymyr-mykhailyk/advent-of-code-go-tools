@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"bufio"
 	"log"
 	"os"
 	"path/filepath"
@@ -22,6 +23,24 @@ func ReadLines(file string) []string {
 		log.Fatalf("unable to read file: %v", err)
 	}
 	return strings.Split(string(body), "\n")
+}
+
+func StreamLines(path string, lines chan<- string) {
+	file, err := os.Open(PathToFile(path))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	defer close(lines)
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines <- scanner.Text()
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func Iterate(inputs []string, iterator func(line string, i int)) {
